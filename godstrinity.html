@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gods Trinity Esports - Registration</title>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* --- CSS STYLES --- */
+        
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Rajdhani', sans-serif; }
+
+        body {
+            background-color: #050505;
+            /* Dark gaming background */
+            background-image: linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.85)), url('https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: #fff;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Typography & Colors */
+        h1, h2, .logo { font-family: 'Orbitron', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+        .gold-text { color: #FFD700; text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+
+        /* Utility Class to hide/show sections */
+        .hidden { display: none !important; }
+
+        /* Navigation */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 40px;
+            background: rgba(0, 0, 0, 0.9);
+            border-bottom: 2px solid #FFD700;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo { font-size: 1.5rem; font-weight: bold; color: #FFD700; }
+
+        #logout-btn {
+            background: transparent;
+            border: 1px solid #FFD700;
+            color: #FFD700;
+            padding: 5px 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            font-family: 'Orbitron', sans-serif;
+        }
+
+        #logout-btn:hover { background: #FFD700; color: #000; }
+
+        /* Main Container */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 100px 20px 20px 20px; /* Top padding for fixed nav */
+        }
+
+        /* Glassmorphism Card */
+        .glass-card {
+            background: rgba(20, 20, 20, 0.85);
+            border: 1px solid #FFD700;
+            border-radius: 15px;
+            padding: 40px;
+            width: 100%;
+            box-shadow: 0 0 30px rgba(255, 215, 0, 0.15);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Login Specifics */
+        .login-card { max-width: 450px; text-align: center; }
+        .subtitle { margin-bottom: 30px; color: #ccc; }
+
+        /* Registration Specifics */
+        .form-card { max-width: 600px; }
+        .user-welcome { margin-bottom: 20px; font-size: 1.1rem; color: #ccc; }
+
+        /* Form Elements */
+        .input-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; color: #FFD700; font-weight: 600; font-size: 1.1rem; }
+        
+        input, select {
+            width: 100%;
+            padding: 12px;
+            background: #000;
+            border: 1px solid #333;
+            color: #fff;
+            border-radius: 5px;
+            font-size: 1rem;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus, select:focus { border-color: #FFD700; box-shadow: 0 0 8px rgba(255, 215, 0, 0.3); }
+
+        .fixed-field {
+            background: #1a1a1a;
+            color: #888;
+            cursor: not-allowed;
+            border: 1px dashed #FFD700;
+        }
+
+        /* Buttons */
+        .g-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 12px;
+            background: #fff;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+        .g-btn:hover { background: #f0f0f0; }
+        .g-btn img { width: 20px; margin-right: 10px; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(45deg, #FFD700, #B8860B);
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            font-family: 'Orbitron', sans-serif;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: 0.3s;
+            text-transform: uppercase;
+        }
+        .submit-btn:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); }
+        .submit-btn:disabled { background: #555; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        #status-msg { margin-top: 15px; font-size: 0.9rem; min-height: 20px; color: #FFD700;}
+    </style>
+</head>
+<body>
+
+    <nav id="app-nav" class="hidden">
+        <div class="logo">GODS TRINITY</div>
+        <button id="logout-btn">LOGOUT</button>
+    </nav>
+
+    <div class="main-wrapper">
+        
+        <div id="login-view" class="glass-card login-card">
+            <h1>GODS TRINITY <span class="gold-text">ESPORTS</span></h1>
+            <p class="subtitle">Join the Elite. Conquer the Arena.</p>
+            
+            <button id="google-login-btn" class="g-btn">
+                <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo">
+                Sign in with Google
+            </button>
+            <p id="status-msg"></p>
+        </div>
+
+        <div id="register-view" class="glass-card form-card hidden">
+            <h2>Player Registration</h2>
+            <p class="user-welcome">Logged in as: <span id="user-display-name" class="gold-text">Player</span></p>
+
+            <form id="registration-form">
+                
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="fullName" required placeholder="Enter your real name">
+                </div>
+
+                <div class="input-group">
+                    <label>Contact Number</label>
+                    <input type="tel" id="contact" required placeholder="+91 XXXXX XXXXX">
+                </div>
+
+                <div class="input-group">
+                    <label>Contact Email</label>
+                    <input type="email" id="email" required placeholder="example@email.com">
+                </div>
+
+                <div class="input-group">
+                    <label>In-Game ID (BGMI Account)</label>
+                    <input type="text" id="gameId" required placeholder="e.g., 5123456789">
+                </div>
+
+                <div class="input-group">
+                    <label>Target Game Platform</label>
+                    <input type="text" id="platform" value="BGMI" readonly class="fixed-field">
+                </div>
+
+                <div class="input-group">
+                    <label>Preferred Tactical Role</label>
+                    <select id="role" required>
+                        <option value="" disabled selected>Select your role</option>
+                        <option value="IGL">IGL (In-Game Leader)</option>
+                        <option value="Fragger">Entry Fragger</option>
+                        <option value="Sniper">Sniper</option>
+                        <option value="Support">Support</option>
+                        <option value="Filter">Filter / Scout</option>
+                        <option value="All-Rounder">All-Rounder</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label>Competitive Experience</label>
+                    <select id="experience" required>
+                        <option value="" disabled selected>Select experience</option>
+                        <option value="No Experience">No Experience</option>
+                        <option value="1 Year">1 Year</option>
+                        <option value="2 Years">2 Years</option>
+                        <option value="3 Years">3 Years</option>
+                        <option value="3 Years+">3 Years+</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="submit-btn">SUBMIT DATA</button>
+            </form>
+        </div>
+    </div>
+
+    <script type="module">
+        // Import Firebase SDKs
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, GoogleAuthProvider, signInWithPopup, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        // --- CONFIGURATION ---
+        // Using your "Main Website" config for both Auth and DB to ensure connectivity works
+        const firebaseConfig = {
+            apiKey: "AIzaSyDHfZhYrtpWir4_EGM_TX3Jna8cPeX5ty0",
+            authDomain: "trinity-esports-registra-d1176.firebaseapp.com",
+            projectId: "trinity-esports-registra-d1176",
+            storageBucket: "trinity-esports-registra-d1176.firebasestorage.app",
+            messagingSenderId: "790355405505",
+            appId: "1:790355405505:web:39b5e45333a87c0a2c8240",
+            measurementId: "G-DBVQBMM1SM"
+        };
+
+        // Initialize
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+        const provider = new GoogleAuthProvider();
+
+        // DOM Elements
+        const loginView = document.getElementById('login-view');
+        const registerView = document.getElementById('register-view');
+        const navBar = document.getElementById('app-nav');
+        const statusMsg = document.getElementById('status-msg');
+        
+        // --- AUTH STATE OBSERVER ---
+        // This function runs automatically whenever the user logs in or out
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // User is signed in.
+                console.log("User Logged In:", user.email);
+                
+                // Hide Login, Show Register
+                loginView.classList.add('hidden');
+                registerView.classList.remove('hidden');
+                navBar.classList.remove('hidden');
+
+                // Update Name display
+                document.getElementById('user-display-name').innerText = user.displayName;
+                // Optional: Auto-fill email
+                // document.getElementById('email').value = user.email;
+
+            } else {
+                // User is signed out.
+                console.log("User Logged Out");
+
+                // Show Login, Hide Register
+                loginView.classList.remove('hidden');
+                registerView.classList.add('hidden');
+                navBar.classList.add('hidden');
+                statusMsg.innerText = "";
+            }
+        });
+
+        // --- LOGIN FUNCTION ---
+        document.getElementById('google-login-btn').addEventListener('click', () => {
+            statusMsg.innerText = "Connecting to Google...";
+            signInWithPopup(auth, provider)
+                .then((result) => {
+                    statusMsg.innerText = "Success! Entering Lobby...";
+                    // onAuthStateChanged will handle the page flip
+                }).catch((error) => {
+                    console.error("Login Error:", error);
+                    statusMsg.innerText = "Error: " + error.message;
+                    statusMsg.style.color = "red";
+                });
+        });
+
+        // --- LOGOUT FUNCTION ---
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            const confirmLogout = confirm("Are you sure you want to logout?");
+            if(confirmLogout) {
+                signOut(auth).then(() => {
+                    alert("Logged out successfully");
+                });
+            }
+        });
+
+        // --- FORM SUBMISSION FUNCTION ---
+        document.getElementById('registration-form').addEventListener('submit', async (e) => {
+            e.preventDefault(); // Stop page refresh
+            
+            const submitBtn = document.querySelector('.submit-btn');
+            const originalBtnText = submitBtn.innerText;
+            
+            submitBtn.innerText = "UPLOADING DATA...";
+            submitBtn.disabled = true;
+
+            // Collect Data
+            const formData = {
+                fullName: document.getElementById('fullName').value,
+                contactNumber: document.getElementById('contact').value,
+                contactEmail: document.getElementById('email').value,
+                inGameID: document.getElementById('gameId').value,
+                platform: document.getElementById('platform').value,
+                role: document.getElementById('role').value,
+                experience: document.getElementById('experience').value,
+                submittedAt: serverTimestamp(),
+                userId: auth.currentUser.uid, // Security: Link data to the specific user
+                userGoogleEmail: auth.currentUser.email // Backup email ref
+            };
+
+            try {
+                // Upload to Firestore Collection "registrations"
+                await addDoc(collection(db, "registrations"), formData);
+                
+                alert("SUCCESS! \n\nYour data has been uploaded to the Gods Trinity Database.");
+                document.getElementById('registration-form').reset();
+            } catch (error) {
+                console.error("Error adding document: ", error);
+                alert("UPLOAD FAILED. \nPlease check your internet connection or try again.");
+            } finally {
+                submitBtn.innerText = originalBtnText;
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
